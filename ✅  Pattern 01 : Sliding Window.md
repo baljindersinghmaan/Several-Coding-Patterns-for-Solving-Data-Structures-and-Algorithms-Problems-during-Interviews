@@ -1,8 +1,12 @@
 # Pattern 1: Sliding Window
 In many problems dealing with an array (or a <b>LinkedList</b>), we are asked to find or calculate something among all the contiguous subarrays (or sublists) of a given size. For example, take a look at this problem:
 
-# Video
+### Video
 https://www.youtube.com/watch?v=tk38CTSAYsg
+
+### How to find if we can use Sliding window
+<img width="1047" height="512" alt="image" src="https://github.com/user-attachments/assets/619ce6d2-29a8-4979-93b8-f79db13f7ec5" />
+
 
 ### Find Averages of Sub Arrays
 https://leetcode.com/problems/maximum-average-subarray-i/
