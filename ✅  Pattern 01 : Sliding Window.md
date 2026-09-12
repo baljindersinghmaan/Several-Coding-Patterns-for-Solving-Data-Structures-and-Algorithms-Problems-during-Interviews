@@ -115,6 +115,37 @@ maxSubarrayOfSizeK(2, [2, 3, 4, 1, 5])//7
 ````
 - Time complexity will be `O(N*K)`, where `N` is the total number of elements in the given array
 
+### Java Solution
+
+```java
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        double avg = Integer.MIN_VALUE;
+        int sWin = 0;
+        int eWin = k-1;
+        int sum = 0;
+
+        for(int i = 0; i < k; i++){
+            sum += nums[i];
+        }
+        avg = (double) sum / k;
+
+        for(int i = k; i < nums.length; i++){
+            sum = sum - nums[i - k];
+            sum = sum + nums[i];
+
+            if ((double)sum/k > avg){
+                avg = (double) sum/k;
+            }
+        }
+
+        return avg;
+
+        
+    }
+}
+```
+
 ### Sliding Window Approach
 If you observe closely, you will realize that to calculate the sum of a contiguous subarray, we can utilize the sum of the previous subarray. For this, consider each subarray as a <b>Sliding Window</b> of size `K`. To calculate the sum of the next subarray, we need to slide the window ahead by one element. So to slide the window forward and calculate the sum of the new position of the <i>sliding window</i>, we need to do two things:
 1. Subtract the element going out of the <i>sliding window</i>, i.e., subtract the first element of the window.
