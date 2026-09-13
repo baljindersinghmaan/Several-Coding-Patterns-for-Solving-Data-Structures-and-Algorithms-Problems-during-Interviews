@@ -332,6 +332,59 @@ longestSubstringWithKdistinct("araaci", 2)//4, The longest substring with no mor
 longestSubstringWithKdistinct("araaci", 1)//2, The longest substring with no more than '1' distinct characters is "aa".
 longestSubstringWithKdistinct("cbbebi", 3)//5, The longest substrings with no more than '3' distinct characters are "cbbeb" & "bbebi".
 ````
+### Java Solution
+````java
+import java.util.HashMap;
+
+class Main {
+
+    public static void main(String[] args) {
+        System.out.println(longestSubstringWithKDistinct("araaci", 2)); // 4
+        System.out.println(longestSubstringWithKDistinct("araaci", 1)); // 2
+        System.out.println(longestSubstringWithKDistinct("cbbebi", 3)); // 5
+    }
+
+    public static int longestSubstringWithKDistinct(String str, int k) {
+
+        int maxLength = 0;
+        int left = 0;
+
+        HashMap<Character, Integer> frequencyMap = new HashMap<>();
+
+        for (int right = 0; right < str.length(); right++) {
+
+            // Add the current character to the window
+            char currentCharacter = str.charAt(right);
+
+            frequencyMap.put(
+                currentCharacter,
+                frequencyMap.getOrDefault(currentCharacter, 0) + 1
+            );
+
+            // Shrink the window if we have more than k distinct characters
+            while (frequencyMap.size() > k) {
+
+                char leftCharacter = str.charAt(left);
+                int frequency = frequencyMap.get(leftCharacter);
+
+                if (frequency == 1) {
+                    frequencyMap.remove(leftCharacter);
+                } else {
+                    frequencyMap.put(leftCharacter, frequency - 1);
+                }
+
+                left++;
+            }
+
+            // Update maximum window length
+            int currentWindowLength = right - left + 1;
+            maxLength = Math.max(maxLength, currentWindowLength);
+        }
+
+        return maxLength;
+    }
+}
+```
 - The above algorithms time complexity will be `O(N)`, where `N` is the number of characters in the input string. The outer for loop runs for all characters, and the inner while loop processes each character only once; therefore, the time complexity of the algorithm will be `O(N+N)`, which is asymptotically equivalent to `O(N)`
 - The algorithms space complexity is `O(K)`, as we will be storing a maximum of `K+1` characters in the <b>HashMap</b>.
 
