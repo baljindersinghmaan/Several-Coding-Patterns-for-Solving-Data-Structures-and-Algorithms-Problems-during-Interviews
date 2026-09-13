@@ -242,6 +242,37 @@ smallestSubarrayWithGivenSum([2, 1, 5, 2, 8], 7)//1
 smallestSubarrayWithGivenSum([3, 4, 1, 1, 6], 8)//3
 
 ````
+### JAVA Solution
+
+```` java
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int sum = 0;
+        int minLen = Integer.MAX_VALUE;
+        int left = 0;
+
+        for (int right = 0; right < nums.length; right++) {
+            // appa number add krde java ge jddo tkk ohh target de braber and target to jyda nhi ho jande
+            sum += nums[right];
+
+            while (sum >= target) {
+                // appa nu minimum length update krni paini
+                minLen = Math.min(minLen, right-left+1);
+
+                //sum de andro left di value ghat krni paini kyu k target ki value jyda ho chuki hai
+                sum -= nums[left];
+
+                // hun appa nu left window increase krni paini
+                left++;
+
+
+            }
+
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+    }
+}
+`````
 - The time complexity of the above algorithm will be `O(N)`. The outer for loop runs for all elements, and the inner while loop processes each element only once; therefore, the time complexity of the algorithm will be `O(N+N)`), which is asymptotically equivalent to `O(N)`.
 - The algorithm runs in constant space `O(1)`.
 
